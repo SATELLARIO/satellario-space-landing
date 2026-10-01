@@ -7,14 +7,24 @@
        unpacker and inline styles; the policy mainly stops any request to third-party hosts. -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; font-src 'self' blob:; img-src 'self' data: blob:; connect-src 'self'; media-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script>
+    /* Resolve the saved / device theme before first paint (the loader uses it). */
+    (function () {
+      try {
+        var t = localStorage.getItem('satellario.theme');
+        if (t === 'dark' || (t !== 'light' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches))
+          document.documentElement.setAttribute('data-st-dark', '');
+      } catch (e) {}
+    })();
+  </script>
   <title>SATELLARIO - Signal Integrity from Orbit</title>
   <link rel="icon" type="image/svg+xml" href="/assets/logo/favicon-adaptive.svg?v=2">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/favicon-32.png?v=2">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/logo/favicon-16.png?v=2">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/apple-touch-icon-180.png">
   <!-- React 18.3.1 served from this site (was unpkg.com): the bundle runtime skips its CDN load when window.React exists -->
-  <script src="/assets/vendor/react.production.min.js"></script>
-  <script src="/assets/vendor/react-dom.production.min.js"></script>
+  <script defer src="/assets/vendor/react.production.min.js"></script>
+  <script defer src="/assets/vendor/react-dom.production.min.js"></script>
   <style>
     /* ── Mobile responsive overrides ──────────────────────────────────────
        All layout is done via inline styles in the bundled template.
@@ -283,10 +293,17 @@
   </style>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #faf9f5; display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
-    #__bundler_loading { position: fixed; bottom: 20px; right: 20px; font: 13px/1.4 -apple-system, BlinkMacSystemFont, sans-serif; color: #666; background: #fff; padding: 8px 14px; border-radius: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.12); z-index: 10000; }
-    #__bundler_thumbnail { position: fixed; inset: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #faf9f5; z-index: 9999; }
-    #__bundler_thumbnail svg { width: 100%; height: 100%; object-fit: contain; }
+    body { background: #FAFBFC; display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
+    #__bundler_loading { position: fixed; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    #__bundler_thumbnail { position: fixed; inset: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: transparent; z-index: 9999; }
+    .st-load { display: flex; flex-direction: column; align-items: center; gap: 20px; color: #2F6DD0; }
+    .st-load svg { width: 36px; height: 36px; display: block; }
+    .st-load-bar { width: 112px; height: 1px; background: rgba(47,109,208,.16); position: relative; overflow: hidden; }
+    .st-load-bar::after { content: ""; position: absolute; inset: 0; background: currentColor; transform-origin: left; animation: stLoad 1.3s cubic-bezier(.2,0,0,1) infinite; }
+    @keyframes stLoad { 0% { transform: scaleX(0); opacity: 1; } 70% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
+    html[data-st-dark] .st-load { color: #6CA0F0; }
+    html[data-st-dark] .st-load-bar { background: rgba(108,160,240,.18); }
+    @media (prefers-reduced-motion: reduce) { .st-load-bar::after { animation: none; transform: scaleX(.6); } }
     #__bundler_placeholder { color: #999; font-size: 14px; }
   </style>
   <noscript>
@@ -350,10 +367,15 @@
     }
     html[data-st-dark] [data-dc-tpl="171"]::after { background: rgba(108, 160, 240, .14); }
     @keyframes stRowFlash { from { opacity: 1; } to { opacity: 0; } }
+
+    /* ── First paint: page stays hidden until theme + language are applied, then fades in ── */
+    html[data-st-booting] body { opacity: 0; }
+    html[data-st-dark] { background: #101A2E !important; }   /* root shows through while body is hidden */
+    body { transition: opacity .22s cubic-bezier(.2, 0, 0, 1); }
   </style>
 </head>
 <body>
-  <div id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="#FAFBFC"></rect><ellipse cx="400" cy="300" rx="320" ry="110" fill="none" stroke="#2F6DD0" stroke-width="1.5" opacity=".2"></ellipse><ellipse cx="400" cy="300" rx="160" ry="200" fill="none" stroke="#2F6DD0" stroke-width="1.5" opacity=".2" transform="rotate(30 400 300)"></ellipse><circle cx="400" cy="300" r="72" fill="#112F56"></circle><circle cx="400" cy="300" r="72" fill="url(#g)" opacity=".7"></circle><defs><radialGradient id="g" cx="38%" cy="36%"><stop offset="0%" stop-color="#1E5FA8"></stop><stop offset="100%" stop-color="#060F22"></stop></radialGradient></defs><line x1="413" y1="270" x2="400" y2="300" stroke="#fff" stroke-width="2.5"></line><line x1="400" y1="300" x2="378" y2="329" stroke="#fff" stroke-width="2.5"></line><line x1="400" y1="300" x2="414" y2="324" stroke="#fff" stroke-width="2.5"></line><circle cx="413" cy="270" r="5" fill="#fff"></circle><circle cx="400" cy="300" r="7" fill="#fff"></circle><circle cx="378" cy="329" r="5" fill="#fff"></circle><circle cx="414" cy="324" r="5" fill="#fff"></circle></svg></div>
+  <div id="__bundler_thumbnail"><div class="st-load"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" aria-hidden="true"><path d="M10 26V10H26"></path><path d="M74 10H90V26"></path><path d="M10 74V90H26"></path><path d="M74 90H90V74"></path><line x1="61.4" y1="23.6" x2="50" y2="50"></line><line x1="50" y1="50" x2="30.4" y2="75.5"></line><line x1="50" y1="50" x2="62.5" y2="71.1"></line><circle cx="61.4" cy="23.6" r="4.5" fill="currentColor" stroke="none"></circle><circle cx="50" cy="50" r="6.2" fill="currentColor" stroke="none"></circle><circle cx="30.4" cy="75.5" r="4.5" fill="currentColor" stroke="none"></circle><circle cx="62.5" cy="71.1" r="4.5" fill="currentColor" stroke="none"></circle></svg><span class="st-load-bar"></span></div></div>
   <div id="__bundler_loading">Unpacking...</div>
 
   <script>
@@ -468,6 +490,20 @@ document.addEventListener('DOMContentLoaded', async function() {
     const doc = new DOMParser().parseFromString(template, 'text/html');
 
     document.documentElement.replaceWith(doc.documentElement);
+
+    // Carry the resolved theme and language onto the new root before it paints, and keep the
+    // page hidden until the theme/i18n pass (bottom script) has run, so nothing flashes.
+    (function () {
+      var root = document.documentElement, t = null, l = null;
+      try { t = localStorage.getItem('satellario.theme'); l = localStorage.getItem('satellario.lang'); } catch (e) {}
+      if (t === 'dark' || (t !== 'light' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches))
+        root.setAttribute('data-st-dark', '');
+      if (l !== 'en' && l !== 'it')
+        l = /^it(-|$)/i.test((navigator.languages && navigator.languages[0]) || navigator.language || '') ? 'it' : 'en';
+      root.setAttribute('lang', l);
+      root.setAttribute('data-st-booting', '');
+      setTimeout(function () { root.removeAttribute('data-st-booting'); }, 4000);   // never stay hidden
+    })();
 
     // Re-inject saved style elements so they continue to apply
     const newHead = document.head || document.getElementsByTagName('head')[0];
@@ -861,6 +897,10 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
         if (dark) document.documentElement.setAttribute("data-st-dark", "");
         else document.documentElement.removeAttribute("data-st-dark");
+        // Browser chrome colour follows the resolved theme (outer <head> metas are gone after mount)
+        var tc = document.querySelector('meta[name="theme-color"]:not([media])');
+        if (!tc) { tc = document.createElement("meta"); tc.name = "theme-color"; document.head.appendChild(tc); }
+        tc.content = dark ? "#101A2E" : "#FAFBFC";
         renderControls();
       }
 
@@ -977,6 +1017,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (lang === "it") applyLanguage("it");
         else { document.documentElement.setAttribute("lang", "en"); document.title = TITLES.en; }
         applyTheme();
+        requestAnimationFrame(function () { document.documentElement.removeAttribute("data-st-booting"); });
       }, 60);
     })();
   </script>
