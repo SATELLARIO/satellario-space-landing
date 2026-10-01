@@ -474,6 +474,28 @@
       [data-dc-tpl="40"] { flex-wrap: wrap; }
       [data-dc-tpl="41"], [data-dc-tpl="42"] { white-space: nowrap; padding-left: 20px !important; padding-right: 20px !important; }
     }
+
+    /* ── Motion ── */
+    /* Status ticker: soft edges instead of a hard cut; pauses under the pointer */
+    [data-dc-tpl="57"] {
+      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%);
+      mask-image: linear-gradient(90deg, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%);
+    }
+    [data-dc-tpl="57"]:hover [data-dc-tpl="58"] { animation-play-state: paused !important; }
+    /* Scroll reveals: 12 px travel, shorter, same easing as the states */
+    .reveal-element {
+      transform: translateY(12px);
+      transition: opacity .6s cubic-bezier(.2, 0, 0, 1), transform .6s cubic-bezier(.2, 0, 0, 1) !important;
+    }
+    /* Reduced motion: every animation lands on its final frame; reveals are shown at once.
+       The hero globe draws a single static frame on its own. */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .001ms !important; animation-iteration-count: 1 !important; animation-delay: 0s !important;
+        transition-duration: .001ms !important; transition-delay: 0s !important; scroll-behavior: auto !important;
+      }
+      .reveal-element { opacity: 1 !important; transform: none !important; }
+    }
   </style>
 </head>
 <body>
