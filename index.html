@@ -491,7 +491,7 @@
     /* Phones: hero CTAs stay on one line each */
     @media (max-width: 480px) {
       [data-dc-tpl="40"] { flex-wrap: wrap; }
-      [data-dc-tpl="41"], [data-dc-tpl="42"] { white-space: nowrap; padding-left: 20px !important; padding-right: 20px !important; }
+      [data-dc-tpl="41"], [data-dc-tpl="42"] { white-space: nowrap; padding-left: 20px !important; padding-right: 20px !important; flex: 1 1 auto; text-align: center; }
     }
 
     /* ── Motion ── */
@@ -521,7 +521,6 @@
     :root { --st-ink-sky: #2A63BD; --st-ink-amber: #8F5E14; --st-ink-crit: #B8382B; }
     html[data-st-dark] { --st-ink-sky: #6CA0F0; --st-ink-amber: #E0A84A; --st-ink-crit: #F07B6E; }
     h1, h2, h3 { text-wrap: balance; }
-    p { text-wrap: pretty; }
     /* Registration marks on the alert monitor, echoing the logo and the globe */
     [data-dc-tpl="154"] { position: relative; }
     [data-dc-tpl="154"]::before, [data-dc-tpl="154"]::after {
