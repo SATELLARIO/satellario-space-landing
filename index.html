@@ -502,7 +502,17 @@
       -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%);
       mask-image: linear-gradient(90deg, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%);
     }
-    [data-dc-tpl="57"]:hover [data-dc-tpl="58"] { animation-play-state: paused !important; }
+    [data-dc-tpl="57"]:hover [data-dc-tpl="58"],
+    [data-dc-tpl="57"]:hover .st-ticker-track { animation-play-state: paused !important; }
+    /* Seamless ticker: the template track only repeats 3 of its 7 items, so a script builds
+       a track of whole sets wide enough to cover the viewport and loops two identical halves. */
+    [data-dc-tpl="57"].st-ticker-on > [data-dc-tpl="58"] { display: none !important; }
+    .st-ticker-track {
+      display: flex; gap: 40px; align-items: center; width: max-content; padding-left: 40px;
+      animation: stTicker var(--st-ticker-dur, 40s) linear infinite; will-change: transform;
+    }
+    .st-ticker-track > .st-ticker-half { display: flex; gap: 40px; align-items: center; flex: none; }
+    @keyframes stTicker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     /* Scroll reveals: 12 px travel, shorter, same easing as the states */
     .reveal-element {
       transform: translateY(12px);
@@ -990,6 +1000,44 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
       }
 
+      /* ── Seamless status ticker (see CSS): clone one full set of items as often as
+         needed to exceed the viewport, twice, and scroll by exactly one half. ── */
+      var tickerSpeed = 40;   // px per second
+      function buildTicker() {
+        var box = document.querySelector('[data-dc-tpl="57"]');
+        var src = box && box.querySelector('[data-dc-tpl="58"]');
+        if (!src) return;
+        var kids = Array.prototype.slice.call(src.children), n = kids.length;
+        for (var i = 1; i < kids.length; i++) {
+          if (kids[i].textContent.trim() === kids[0].textContent.trim()) { n = i; break; }
+        }
+        var set = kids.slice(0, n);
+        var old = box.querySelector(".st-ticker-track"); if (old) old.remove();
+        var track = document.createElement("div"); track.className = "st-ticker-track"; track.setAttribute("aria-hidden", "true");
+        function half() {
+          var h = document.createElement("div"); h.className = "st-ticker-half";
+          return h;
+        }
+        function addSet(h) {
+          set.forEach(function (el) {
+            var c = el.cloneNode(true);
+            c.removeAttribute("data-dc-tpl");
+            c.querySelectorAll("[data-dc-tpl]").forEach(function (x) { x.removeAttribute("data-dc-tpl"); });
+            h.appendChild(c);
+          });
+        }
+        var a = half(); addSet(a); track.appendChild(a);
+        box.classList.add("st-ticker-on"); box.appendChild(track);
+        // one set (+ the 40 px gap) must be at least as wide as the viewport
+        var setW = a.getBoundingClientRect().width + 40, k = Math.max(1, Math.ceil((box.clientWidth + 40) / setW));
+        for (var r = 1; r < k; r++) addSet(a);
+        var b = a.cloneNode(true); track.appendChild(b);
+        var halfW = a.getBoundingClientRect().width + 40;
+        track.style.setProperty("--st-ticker-dur", (halfW / tickerSpeed).toFixed(2) + "s");
+      }
+      var tickerTimer = 0;
+      window.addEventListener("resize", function () { clearTimeout(tickerTimer); tickerTimer = setTimeout(buildTicker, 200); });
+
       function applyLanguage(l) {
         lang = l;
         var hs = document.querySelectorAll("#mission h3");
@@ -1003,6 +1051,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         var burger = document.querySelector(".mobile-menu-toggle");
         if (burger) burger.setAttribute("aria-label", l === "it" ? "Apri o chiudi il menu di navigazione" : "Toggle Navigation Menu");
         renderControls();
+        buildTicker();
       }
 
       /* ── Theme: bidirectional palette map over serialized inline styles.
@@ -1193,6 +1242,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (panel) panel.setAttribute("data-st-keep", "");
 
         buildControls(navInner);
+        buildTicker();
         if (lang === "it") applyLanguage("it");
         else { document.documentElement.setAttribute("lang", "en"); document.title = TITLES.en; }
         applyTheme();
