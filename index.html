@@ -719,7 +719,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
       const toggleBtn = document.createElement('button');
       toggleBtn.className = 'mobile-menu-toggle';
-      toggleBtn.setAttribute('aria-label', 'Toggle Navigation Menu');
+      toggleBtn.setAttribute('aria-label', document.documentElement.lang === 'it' ? 'Apri o chiudi il menu di navigazione' : 'Toggle Navigation Menu');
       toggleBtn.innerHTML = '<span></span><span></span><span></span>';
       navInner.appendChild(toggleBtn);
 
@@ -839,103 +839,106 @@ document.addEventListener('DOMContentLoaded', async function() {
         // Nav / shared
         "Mission": "Missione",
         "Architecture": "Architettura",
-        "Live Feed": "Feed Live",
+        "Live Feed": "Feed live",
         "Access": "Accesso",
-        "Request Access": "Richiedi Accesso",
+        "Request Access": "Richiedi l'accesso",
         // Hero
-        "Signal Integrity · Sovereign PNT · On-orbit Edge-AI": "Integrità del Segnale · PNT Sovrano · Edge-AI in Orbita",
-        "The smallest edge-AI powered": "I più piccoli satelliti di",
-        "signal integrity": "integrità del segnale",
-        "satellites.": "potenziati da edge-AI.",
-        "SATELLARIO detects GNSS jamming and spoofing in real time from orbit and delivers structured interference intelligence to maritime, aviation, and governmental operators - sovereign navigation resilience, on subscription.": "SATELLARIO rileva jamming e spoofing GNSS in tempo reale dall'orbita e fornisce intelligence strutturata sulle interferenze a operatori marittimi, aeronautici e governativi - resilienza di navigazione sovrana, in abbonamento.",
-        "View Live Feed": "Guarda il Feed Live",
-        "Technical Architecture": "Architettura Tecnica",
+        "Signal Integrity · Sovereign PNT · On-orbit Edge-AI": "Integrità del segnale · PNT sovrano · Edge-AI in orbita",
+        "The smallest edge-AI powered": "I satelliti più piccoli",
+        "signal integrity": "per l'integrità del segnale",
+        "satellites.": "con edge-AI a bordo.",
+        "SATELLARIO detects GNSS jamming and spoofing in real time from orbit and delivers structured interference intelligence to maritime, aviation, and critical-infrastructure operators - sovereign navigation resilience, on subscription.": "SATELLARIO rileva dall'orbita, in tempo reale, jamming e spoofing GNSS e fornisce intelligence strutturata sulle interferenze agli operatori del settore marittimo, aeronautico e delle infrastrutture critiche: resilienza sovrana della navigazione, in abbonamento.",
+        "View Live Feed": "Vedi il feed live",
+        "Technical Architecture": "Architettura tecnica",
         "Real-time": "Tempo reale",
-        "Interference alerts": "Allerte di interferenza",
+        "Interference alerts": "Allerte sulle interferenze",
         "Global": "Globale",
         "Maritime coverage": "Copertura marittima",
-        "Sovereign": "Sovrano",
-        "Independent PNT truth": "Verità PNT indipendente",
-        "Continuous watch": "Sorveglianza continua",
+        "Sovereign": "Sovranità",
+        "Independent PNT truth": "Riferimento PNT indipendente",
+        "Continuous watch": "Monitoraggio continuo",
         // Status ticker
-        "System Online": "Sistema Online",
+        "System Online": "Sistema attivo",
         "POCKETQUBE CONSTELLATION": "COSTELLAZIONE POCKETQUBE",
         "EDGE-AI ON-ORBIT INFERENCE": "INFERENZA EDGE-AI IN ORBITA",
-        "SOVEREIGN GNSS SIGNAL INTEGRITY": "INTEGRITÀ DEL SEGNALE GNSS SOVRANA",
-        "MARITIME · AVIATION · GOVERNMENT": "MARITTIMO · AVIAZIONE · GOVERNO",
-        "LECCO / MILANO & LUXEMBOURG": "LECCO / MILANO & LUSSEMBURGO",
+        "SOVEREIGN GNSS SIGNAL INTEGRITY": "INTEGRITÀ SOVRANA DEL SEGNALE GNSS",
+        "MARITIME · AVIATION · GOVERNMENT": "MARITTIMO · AVIAZIONE · ENTI GOVERNATIVI",
+        "LECCO / MILANO & LUXEMBOURG": "LECCO / MILANO E LUSSEMBURGO",
         // Mission
-        "Mission Brief": "Briefing di Missione",
-        "Two segments. One verdict": "Due segmenti. Un verdetto",
-        "on navigation truth.": "sulla verità della navigazione.",
-        "Space Segment": "Segmento Spaziale",
-        "A distributed mesh of compact satellites carrying edge-AI inference payloads. Detection happens on-orbit - only classified verdicts reach the ground, not raw spectrum.": "Una rete distribuita di satelliti compatti con payload di inferenza edge-AI. Il rilevamento avviene in orbita - a terra arrivano solo i verdetti classificati, non lo spettro grezzo.",
-        "Data Service": "Servizio Dati",
-        "Low-latency jamming, spoofing and meaconing alerts on subscription. Structured events integrate directly into existing fleet management, navigation assurance, and critical infrastructure systems.": "Allerte a bassa latenza di jamming, spoofing e meaconing in abbonamento. Gli eventi strutturati si integrano direttamente nei sistemi esistenti di gestione flotte, assicurazione della navigazione e infrastrutture critiche.",
+        "Mission Brief": "La missione in sintesi",
+        "Two segments. One verdict": "Due segmenti. Un unico verdetto",
+        "on navigation truth.": "sull'affidabilità della navigazione.",
+        "Space Segment": "Segmento spaziale",
+        "A distributed mesh of compact satellites carrying edge-AI inference payloads. Detection happens on-orbit - only classified verdicts reach the ground, not raw spectrum.": "Una rete distribuita di satelliti compatti con payload di inferenza edge-AI. Il rilevamento avviene in orbita: a terra arrivano solo verdetti già classificati, non lo spettro grezzo.",
+        "Data Service": "Servizio dati",
+        "Low-latency jamming, spoofing and meaconing alerts on subscription. Structured events integrate directly into existing fleet management, navigation assurance, and critical infrastructure systems.": "Allerte a bassa latenza su jamming, spoofing e meaconing, in abbonamento. Gli eventi strutturati si integrano direttamente nei sistemi già in uso per la gestione delle flotte, il controllo dell'integrità della navigazione e le infrastrutture critiche.",
         "Assurance": "Garanzia",
-        "Independent, off-receiver truth for navigation integrity. For nations and operators requiring an external check on their own PNT that cannot be denied, spoofed, or co-opted.": "Verità indipendente ed esterna al ricevitore per l'integrità della navigazione. Per nazioni e operatori che richiedono una verifica esterna del proprio PNT che non può essere negata, falsificata o cooptata.",
+        "Independent, off-receiver truth for navigation integrity. For nations and operators requiring an external check on their own PNT that cannot be denied, spoofed, or co-opted.": "Un riferimento indipendente, esterno al ricevitore, per l'integrità della navigazione. Per Stati e operatori che necessitano di una verifica esterna del proprio PNT, che non possa essere negata, falsificata o compromessa.",
         // Architecture
-        "Signal integrity delivered": "Integrità del segnale consegnata",
+        "Signal integrity delivered": "Integrità del segnale garantita",
         "before the data lands.": "prima che i dati arrivino a terra.",
-        "Three properties that make on-orbit detection categorically different from ground-based monitoring.": "Tre proprietà che rendono il rilevamento in orbita categoricamente diverso dal monitoraggio da terra.",
-        "On-Orbit Inference": "Inferenza in Orbita",
+        "Three properties that make on-orbit detection categorically different from ground-based monitoring.": "Tre caratteristiche che rendono il rilevamento in orbita radicalmente diverso dal monitoraggio da terra.",
+        "On-Orbit Inference": "Inferenza in orbita",
         "The verdict, not the spectrum.": "Il verdetto, non lo spettro.",
-        "Detection and classification happen on the satellite before any data reaches the ground. The payload architecture stays proprietary - nothing raw ever leaves the orbit.": "Il rilevamento e la classificazione avvengono sul satellite prima che qualsiasi dato raggiunga terra. L'architettura del payload resta proprietaria - nulla di grezzo lascia mai l'orbita.",
-        "Sovereign by Design": "Sovrana per Progettazione",
+        "Detection and classification happen on the satellite before any data reaches the ground. The payload architecture stays proprietary - nothing raw ever leaves the orbit.": "Rilevamento e classificazione avvengono a bordo del satellite, prima che qualsiasi dato arrivi a terra. L'architettura del payload resta proprietaria: nessun dato grezzo lascia l'orbita.",
+        "Sovereign by Design": "Sovranità by design",
         "No shared infrastructure.": "Nessuna infrastruttura condivisa.",
-        "Each operator's feed is independently isolated and tenanted. No shared advisory feeds. No single point of truth that can be denied, degraded, or co-opted by a third party.": "Il feed di ogni operatore è isolato e segregato in modo indipendente. Nessun feed di avviso condiviso. Nessun punto unico di verità che possa essere negato, degradato o cooptato da terzi.",
-        "Global Maritime Reach": "Portata Marittima Globale",
-        "Where sensors cannot go.": "Dove i sensori non possono arrivare.",
-        "Continuous coverage over open ocean, remote corridors, and maritime chokepoints. A constellation in low Earth orbit reaches everywhere ground infrastructure cannot.": "Copertura continua su oceano aperto, corridoi remoti e colli di bottiglia marittimi. Una costellazione in orbita terrestre bassa arriva ovunque l'infrastruttura di terra non possa.",
-        "Operational Note": "Nota Operativa",
-        "When the position fix is the attack surface, the verification cannot live on the same band.": "Quando il fix di posizione è la superficie d'attacco, la verifica non può vivere sulla stessa banda.",
-        "SATELLARIO provides an external, off-receiver check - independent confirmation that a reported position has not been manipulated.": "SATELLARIO fornisce una verifica esterna, indipendente dal ricevitore - conferma indipendente che una posizione riportata non è stata manipolata.",
+        "Each operator's feed is independently isolated and tenanted. No shared advisory feeds. No single point of truth that can be denied, degraded, or co-opted by a third party.": "Il feed di ogni operatore è isolato in un ambiente dedicato. Nessun feed di allerta condiviso. Nessuna fonte unica di riferimento che terzi possano negare, degradare o compromettere.",
+        "Global Maritime Reach": "Copertura marittima globale",
+        "Where sensors cannot go.": "Dove i sensori non arrivano.",
+        "Continuous coverage over open ocean, remote corridors, and maritime chokepoints. A constellation in low Earth orbit reaches everywhere ground infrastructure cannot.": "Copertura continua in mare aperto, lungo le rotte più remote e negli stretti strategici. Una costellazione in orbita bassa raggiunge ogni area che le infrastrutture di terra non possono coprire.",
+        "Operational Note": "Nota operativa",
+        "When the position fix is the attack surface, the verification cannot live on the same band.": "Se l'attacco colpisce proprio il fix di posizione, la verifica non può passare sulla stessa banda.",
+        "SATELLARIO provides an external, off-receiver check - independent confirmation that a reported position has not been manipulated.": "SATELLARIO offre un controllo esterno e indipendente dal ricevitore: la conferma che una posizione dichiarata non è stata manipolata.",
         // Live feed
-        "Interactive Alert Monitor": "Monitor Allerte Interattivo",
-        "What the API": "Cosa consegna",
+        "Interactive Alert Monitor": "Monitor interattivo delle allerte",
+        "What the API": "Cosa fornisce",
         "delivers, live.": "l'API, in diretta.",
-        "A simulated stream of the structured events your systems receive - timestamp, event class, confidence score and ECEF coordinates. Pause to inspect any record.": "Un flusso simulato degli eventi strutturati che i tuoi sistemi ricevono - timestamp, classe evento, punteggio di confidenza e coordinate ECEF. Metti in pausa per ispezionare qualsiasi record.",
+        "A simulated stream of the structured events your systems receive - timestamp, event class, confidence score and ECEF coordinates. Pause to inspect any record.": "Un flusso simulato degli eventi strutturati che ricevono i tuoi sistemi: timestamp, classe dell'evento, livello di confidenza e coordinate ECEF. Metti in pausa per esaminare un singolo record.",
         "SATELLARIO / interference feed": "SATELLARIO / feed interferenze",
         "Pause": "Pausa",
         "Resume": "Riprendi",
         "Region · Band": "Regione · Banda",
         "Class": "Classe",
-        "Streamed via SATELLARIO REST / WebSocket · ECEF WGS-84 · median delivery 1.9 s": "Trasmesso via SATELLARIO REST / WebSocket · ECEF WGS-84 · consegna mediana 1,9 s",
+        "Streamed via SATELLARIO REST / WebSocket · ECEF WGS-84": "Distribuito via SATELLARIO REST / WebSocket · ECEF WGS-84",
         // Live feed regions (dynamic rows)
         "Black Sea": "Mar Nero",
-        "Eastern Med": "Mediterraneo Orientale",
-        "Baltic Approaches": "Approcci del Baltico",
+        "Baltic Approaches": "Accessi al Baltico",
         "Persian Gulf": "Golfo Persico",
         "Strait of Hormuz": "Stretto di Hormuz",
-        "South China Sea": "Mar Cinese Meridionale",
-        "Korean Peninsula": "Penisola Coreana",
         "Red Sea": "Mar Rosso",
         "Gulf of Aden": "Golfo di Aden",
-        "Levant Corridor": "Corridoio del Levante",
-        "Taiwan Strait": "Stretto di Taiwan",
+        "Suez Canal Approach": "Accesso al Canale di Suez",
+        "Strait of Malacca": "Stretto di Malacca",
+        "Singapore Strait": "Stretto di Singapore",
+        "Bosphorus": "Bosforo",
+        "Gibraltar Strait": "Stretto di Gibilterra",
+        "English Channel": "Canale della Manica",
         // Access CTA
-        "Sovereign navigation resilience,": "Resilienza di navigazione sovrana,",
+        "Sovereign navigation resilience,": "Resilienza sovrana della navigazione,",
         "on subscription.": "in abbonamento.",
-        "Operator-isolated tenancy, regional tasking priority and direct integration support for maritime, aviation and governmental programs.": "Tenancy isolata per operatore, priorità di tasking regionale e supporto diretto all'integrazione per programmi marittimi, aeronautici e governativi.",
-        "Request Operator Access": "Richiedi Accesso Operatore",
-        "Review Feed Schema": "Consulta lo Schema del Feed",
+        "Operator-isolated tenancy, regional tasking priority and direct integration support for maritime, aviation and governmental programs.": "Ambienti isolati per ogni operatore, priorità di tasking regionale e supporto diretto all'integrazione per programmi marittimi, aeronautici e governativi.",
+        "Request Operator Access": "Richiedi l'accesso operatore",
+        "Review Feed Schema": "Consulta lo schema del feed",
         // Footer
-        "Real-time GNSS interference intelligence from an edge-AI PocketQube constellation.": "Intelligence sulle interferenze GNSS in tempo reale da una costellazione PocketQube edge-AI.",
+        "Real-time GNSS interference intelligence from an edge-AI PocketQube constellation.": "Intelligence in tempo reale sulle interferenze GNSS da una costellazione PocketQube con edge-AI.",
         "Platform": "Piattaforma",
         "Sectors": "Settori",
         "Company": "Azienda",
         "Constellation": "Costellazione",
+        "API & Schema": "API e schema",
         "Coverage": "Copertura",
         "Aviation": "Aviazione",
         "Maritime": "Marittimo",
-        "Government": "Governo",
-        "Critical Infra": "Infrastrutture Critiche",
+        "Government": "Enti governativi",
+        "Critical Infra": "Infrastrutture critiche",
         "Security": "Sicurezza",
         "Compliance": "Conformità",
         "Contact": "Contatti",
-        "© 2026 SATELLARIO · Signal Integrity from Orbit": "© 2026 SATELLARIO · Integrità del Segnale dall'Orbita",
+        "© 2026 SATELLARIO · Signal Integrity from Orbit": "© 2026 SATELLARIO · Integrità del segnale dall'orbita",
         "STATUS · NOMINAL": "STATO · NOMINALE",
-        "Privacy & Cookies": "Privacy e Cookie",
+        "v2.1 · FEED ONLINE": "v2.1 · FEED ATTIVO",
+        "Privacy & Cookies": "Privacy e cookie",
         "Operated by": "Gestito da",
         "the SATELLARIO founding team": "il team fondatore di SATELLARIO",
         "(company not yet incorporated)": "(società non ancora costituita)"
@@ -948,13 +951,13 @@ document.addEventListener('DOMContentLoaded', async function() {
       // wholesale and excluded from the generic per-node pass via data-st-skip.
       var MISSION_H3 = [
         { en: "PocketQube<br>Constellation", it: "Costellazione<br>PocketQube" },
-        { en: "Interference<br>Intelligence", it: "Intelligence sulle<br>Interferenze" },
-        { en: "Sovereign<br>Resilience", it: "Resilienza<br>Sovrana" }
+        { en: "Interference<br>Intelligence", it: "Intelligence sulle<br>interferenze" },
+        { en: "Sovereign<br>Resilience", it: "Resilienza<br>sovrana" }
       ];
 
       var TITLES = {
         en: "SATELLARIO - Signal Integrity from Orbit",
-        it: "SATELLARIO - Integrità del Segnale dall'Orbita"
+        it: "SATELLARIO - Integrità del segnale dall'orbita"
       };
 
       var lang = (function () {
@@ -997,6 +1000,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         translateTree(document.body, l === "it" ? I18N : I18N_REV);
         document.documentElement.setAttribute("lang", l);
         document.title = TITLES[l];
+        var burger = document.querySelector(".mobile-menu-toggle");
+        if (burger) burger.setAttribute("aria-label", l === "it" ? "Apri o chiudi il menu di navigazione" : "Toggle Navigation Menu");
         renderControls();
       }
 
@@ -1090,11 +1095,11 @@ document.addEventListener('DOMContentLoaded', async function() {
       };
       var THEME_LABELS = {
         en: { auto: "Auto", light: "Day", dark: "Night" },
-        it: { auto: "Auto", light: "Giorno", dark: "Notte" }
+        it: { auto: "Auto", light: "Chiaro", dark: "Scuro" }
       };
       var THEME_TITLES = {
         en: "Theme: device / day / night",
-        it: "Tema: dispositivo / giorno / notte"
+        it: "Tema: dispositivo / chiaro / scuro"
       };
 
       var themeBtn = null, langBtn = null;
